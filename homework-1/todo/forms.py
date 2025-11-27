@@ -6,5 +6,5 @@ class TodoForm(forms.ModelForm):
         model = Todo
         fields = ['title', 'description', 'due_date']
         widgets = {
-            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'due_date': forms.TextInput(attrs={'class': 'datepicker'}),
         }

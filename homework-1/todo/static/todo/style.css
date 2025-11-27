@@ -1,0 +1,245 @@
+/* Super Mario Theme */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #5c94fc;
+    /* Overworld Sky Blue */
+    background-image: url('mario_bg.png');
+    background-repeat: repeat;
+    background-size: 512px;
+    /* Adjust size as needed */
+    color: #000;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    image-rendering: pixelated;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background-color: #e52521;
+    /* Mario Red */
+    padding: 20px 0;
+    border-bottom: 4px solid #000;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+}
+
+header .container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 1.5rem;
+    /* Smaller font size for pixel font readability */
+    color: #fff;
+    text-shadow: 4px 4px 0 #000;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    text-decoration: none;
+    border: 4px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    text-transform: uppercase;
+}
+
+.btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+.btn-primary {
+    background-color: #e52521;
+    /* Mario Red */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #ff4d4d;
+}
+
+.btn-danger {
+    background-color: #000;
+    /* Bowser Black/Dark */
+    color: #f87800;
+    /* Fire Flower Orange */
+}
+
+.btn-danger:hover {
+    background-color: #333;
+}
+
+.btn-secondary {
+    background-color: #43b047;
+    /* Luigi Green */
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5cd660;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.5rem;
+    border-width: 2px;
+    box-shadow: 2px 2px 0 #000;
+}
+
+.btn-sm:active {
+    transform: translate(2px, 2px);
+}
+
+/* Todo List */
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-item {
+    background-color: #fff;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.todo-item::before {
+    /* Coin decoration */
+    content: "★";
+    color: #fbd000;
+    text-shadow: 2px 2px 0 #000;
+    position: absolute;
+    left: -15px;
+    top: -15px;
+    font-size: 1.5rem;
+    background: #000;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fbd000;
+}
+
+.todo-content {
+    flex-grow: 1;
+}
+
+.todo-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #000;
+}
+
+.todo-status {
+    font-size: 0.6rem;
+    display: inline-block;
+    padding: 4px 8px;
+    border: 2px solid #000;
+    text-transform: uppercase;
+}
+
+.status-completed {
+    background-color: #fbd000;
+    /* Coin Gold */
+    color: #000;
+}
+
+.status-pending {
+    background-color: #fff;
+    color: #000;
+}
+
+.todo-meta {
+    font-size: 0.6rem;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+.todo-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 1rem;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #000;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+.flatpickr-input {
+    width: 100%;
+    padding: 10px;
+    border: 4px solid #000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+    height: 1.5rem;
+    width: 1.5rem;
+    accent-color: #e52521;
+}
+
+.card {
+    background-color: #f8f9fa;
+    /* Cloud White */
+    padding: 2rem;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Flatpickr Customization for 8-bit look */
+.flatpickr-calendar {
+    font-family: 'Press Start 2P', cursive !important;
+    border: 4px solid #000 !important;
+    border-radius: 0 !important;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.flatpickr-day.selected {
+    background: #e52521 !important;
+    border-color: #e52521 !important;
+}
