@@ -26,22 +26,35 @@ A simple Django-based TODO application that allows users to create, edit, delete
 
 ## Installation
 
-1. **Clone or navigate to the project directory:**
+1. **Clone the repository (if you haven't already):**
    ```bash
-   cd homework-1
+   git clone <repository-url>
+   cd ai-dev-tools-zoomcamp-hw/homework-1
    ```
 
-2. **Activate the virtual environment:**
+2. **Create a virtual environment:**
+   ```bash
+   python3 -m venv venv
+   ```
+
+3. **Activate the virtual environment:**
+   
+   On macOS/Linux:
    ```bash
    source venv/bin/activate
    ```
+   
+   On Windows:
+   ```bash
+   venv\Scripts\activate
+   ```
 
-3. **Install dependencies:**
+4. **Install dependencies:**
    ```bash
    pip install django
    ```
 
-4. **Run database migrations:**
+5. **Run database migrations:**
    ```bash
    python manage.py migrate
    ```
@@ -71,11 +84,12 @@ homework-1/
 ├── config/              # Django project settings
 ├── todo/                # Todo application
 │   ├── migrations/      # Database migrations
+│   ├── static/          # Static files (CSS, images)
 │   ├── templates/       # HTML templates
 │   └── ...
 ├── manage.py            # Django management script
-├── db.sqlite3           # SQLite database
-└── venv/                # Virtual environment
+├── db.sqlite3           # SQLite database (created after migrations)
+└── venv/                # Virtual environment (created locally, not in git)
 ```
 
 ## Usage
