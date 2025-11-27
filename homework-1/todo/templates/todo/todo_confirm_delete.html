@@ -1,15 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Delete Todo</title>
+    <link rel="stylesheet" href="{% static 'todo/style.css' %}">
 </head>
+
 <body>
-    <h1>Delete Todo</h1>
-    <p>Are you sure you want to delete "{{ todo.title }}"?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-    </form>
-    <a href="{% url 'todo_list' %}">Cancel</a>
+    <header>
+        <div class="container">
+            <h1>Delete Todo</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <p>Are you sure you want to delete "<strong>{{ todo.title }}</strong>"?</p>
+            <form method="post" style="margin-top: 20px;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                <a href="{% url 'todo_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>

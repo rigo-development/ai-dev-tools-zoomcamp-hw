@@ -1,33 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Todo List</title>
+    <link rel="stylesheet" href="{% static 'todo/style.css' %}">
 </head>
 <body>
-    <h1>Todo List</h1>
-    <a href="{% url 'todo_create' %}">Add New Todo</a>
-    <ul>
-        {% for todo in todos %}
-        <li>
-            <strong>{{ todo.title }}</strong>
-            {% if todo.completed %}
-                <span style="color: green;">(Completed)</span>
-            {% else %}
-                <span style="color: red;">(Pending)</span>
-            {% endif %}
-            {% if todo.due_date %}
-                Due: {{ todo.due_date }}
-            {% endif %}
-            <a href="{% url 'todo_update' todo.pk %}">Edit</a>
-            <a href="{% url 'todo_delete' todo.pk %}">Delete</a>
-            <form method="post" action="{% url 'todo_toggle_complete' todo.pk %}" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit">
-                    {% if todo.completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
-                </button>
-            </form>
-        </li>
-        {% endfor %}
-    </ul>
+    <header>
+        <div class="container">
+            <h1>Todo List</h1>
+            <a href="{% url 'todo_create' %}" class="btn btn-primary">Add New Todo</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <ul class="todo-list">
+            {% for todo in todos %}
+            <li class="todo-item">
+                <div class="todo-content">
+                    <span class="todo-title">{{ todo.title }}</span>
+                    {% if todo.completed %}
+                        <span class="todo-status status-completed">Completed</span>
+                    {% else %}
+                        <span class="todo-status status-pending">Pending</span>
+                    {% endif %}
+                    
+                    {% if todo.due_date %}
+                        <div class="todo-meta">Due: {{ todo.due_date }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="todo-actions">
+                    <form method="post" action="{% url 'todo_toggle_complete' todo.pk %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-secondary">
+                            {% if todo.completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
+                        </button>
+                    </form>
+                    <a href="{% url 'todo_update' todo.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{% url 'todo_delete' todo.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </li>
+            {% empty %}
+            <li class="todo-item">
+                <div class="todo-content">
+                    <p>No todos yet. Add one above!</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
