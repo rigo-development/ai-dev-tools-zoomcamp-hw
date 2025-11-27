@@ -4,10 +4,11 @@ A simple Django-based TODO application that allows users to create, edit, delete
 
 ## Features
 
+- 🍄 **Super Mario Brothers Theme**: Retro 8-bit design with custom pixel art background and fonts.
+- 📅 **Smart Datepicker**: Integrated Flatpickr for easy date and time selection.
 - ✅ Create new TODO items
 - ✏️ Edit existing TODOs
 - 🗑️ Delete TODOs
-- 📅 Assign due dates to tasks
 - ✅ Mark TODOs as completed or incomplete
 - 📋 View all TODOs in a clean list interface
 
@@ -15,7 +16,7 @@ A simple Django-based TODO application that allows users to create, edit, delete
 
 - **Backend**: Django 5.2
 - **Database**: SQLite
-- **Frontend**: HTML, CSS (basic styling)
+- **Frontend**: HTML, CSS (Super Mario Theme), Flatpickr
 - **Python**: 3.x
 
 ## Prerequisites
@@ -50,6 +51,15 @@ A simple Django-based TODO application that allows users to create, edit, delete
 ```bash
 source venv/bin/activate
 python manage.py runserver
+```
+
+## Running Tests
+
+To run the automated test suite:
+
+```bash
+source venv/bin/activate
+python manage.py test
 ```
 
 The application will be available at `http://127.0.0.1:8000/`
