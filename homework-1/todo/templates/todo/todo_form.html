@@ -1,15 +1,53 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Todo</title>
+    <link rel="stylesheet" href="{% static 'todo/style.css' %}">
 </head>
+
 <body>
-    <h1>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Todo</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    <a href="{% url 'todo_list' %}">Back to List</a>
+    <header>
+        <div class="container">
+            <h1>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Todo</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="{% url 'todo_list' %}" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr(".datepicker", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true
+        });
+    </script>
 </body>
+
 </html>
