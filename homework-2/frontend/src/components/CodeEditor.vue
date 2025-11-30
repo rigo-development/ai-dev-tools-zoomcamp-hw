@@ -54,10 +54,10 @@ const handleMount = (editor: any) => {
 .editor-container {
   width: 100%;
   height: 100%;
-  min-height: 500px;
-  border: 1px solid #333;
+  overflow: hidden;
 }
 .editor {
+    width: 100%;
     height: 100%;
 }
 </style>

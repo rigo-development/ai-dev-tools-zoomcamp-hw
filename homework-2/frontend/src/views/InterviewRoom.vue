@@ -74,45 +74,78 @@ const runCode = () => {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
+  width: 100vw;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  overflow: hidden;
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #252526;
+  border-bottom: 1px solid #333;
+  height: 50px;
+  box-sizing: border-box;
+}
+.header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #fff;
 }
 .run-btn {
-  padding: 8px 16px;
-  background-color: #42b883;
+  padding: 6px 16px;
+  background-color: #0e639c;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 2px;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+.run-btn:hover {
+  background-color: #1177bb;
 }
 .run-btn:disabled {
-  background-color: #ccc;
+  background-color: #4d4d4d;
   cursor: not-allowed;
 }
 .content {
   display: flex;
   flex: 1;
-  gap: 20px;
-  min-height: 0; /* Important for flex child scrolling */
+  min-height: 0; /* Critical for nested flex scrolling */
 }
 .editor-pane {
   flex: 2;
-  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #333;
+  min-width: 0; /* Prevent flex item from overflowing */
 }
 .output-pane {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   background: #1e1e1e;
-  color: #fff;
+  border-left: 1px solid #333;
+  min-width: 0;
+}
+.output-pane h3 {
+  margin: 0;
   padding: 10px;
-  border-radius: 4px;
+  background-color: #252526;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid #333;
+}
+.output-pane pre {
+  margin: 0;
+  padding: 10px;
   overflow: auto;
-  font-family: monospace;
+  flex: 1;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
 }
 </style>
