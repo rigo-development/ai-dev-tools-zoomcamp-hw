@@ -10,7 +10,7 @@ export const state = reactive({
 
 // "undefined" means the URL will be computed from the `window.location` object
 // For dev, backend is usually on localhost:3000
-const URL = process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:3000';
+const URL = import.meta.env.MODE === 'production' ? undefined : 'http://localhost:3000';
 
 export const socket: Socket = io(URL, {
     autoConnect: false
