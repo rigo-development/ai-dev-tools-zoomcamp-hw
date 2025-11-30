@@ -1,98 +1,287 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Backend - Online Coding Interview Platform
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Nest.js backend with WebSocket support for real-time collaborative coding interviews.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- **WebSocket Gateway** - Real-time bidirectional communication via Socket.io
+- **Room Management** - Isolated interview sessions
+- **Code Execution** - Safe execution via Piston API
+- **Language Support** - 8+ programming languages
+- **Event Logging** - Comprehensive debugging logs
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tech Stack
 
-## Project setup
+- **Framework**: Nest.js 11
+- **WebSockets**: Socket.io 4.8
+- **Language**: TypeScript 5.7
+- **Testing**: Jest 29
+- **Runtime**: Node.js 18+
+
+## Installation
 
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
+## Running the Application
 
+### Development Mode (with watch)
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Run tests
-
+### Production Mode
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run build
+npm run start:prod
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### Debug Mode
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run start:debug
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## Testing
 
-## Resources
+### Run All Tests
+```bash
+npm test
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### Run Integration Tests
+```bash
+npm run test:e2e
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Run Tests with Coverage
+```bash
+npm run test:cov
+```
 
-## Support
+### Watch Mode
+```bash
+npm run test:watch
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Project Structure
 
-## Stay in touch
+```
+src/
+├── app.module.ts              # Main application module
+├── app.controller.ts          # Basic health check endpoint
+├── app.service.ts             # Application service
+├── main.ts                    # Application entry point
+├── events/
+│   └── events.gateway.ts      # WebSocket event handlers
+└── execution/
+    └── execution.service.ts   # Code execution service
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+test/
+├── app.e2e-spec.ts           # End-to-end tests
+└── events.gateway.integration.spec.ts  # Integration tests
+```
+
+## WebSocket Events
+
+### Client → Server
+
+#### `joinRoom`
+Join a specific interview room.
+```typescript
+socket.emit('joinRoom', roomId: string);
+```
+
+#### `codeChange`
+Broadcast code changes to other users in the room.
+```typescript
+socket.emit('codeChange', {
+  roomId: string,
+  code: string
+});
+```
+
+#### `languageChange`
+Sync language selection across all users.
+```typescript
+socket.emit('languageChange', {
+  roomId: string,
+  language: string
+});
+```
+
+#### `executeCode`
+Execute code and broadcast results.
+```typescript
+socket.emit('executeCode', {
+  roomId: string,
+  language: string,
+  code: string
+});
+```
+
+### Server → Client
+
+#### `joinedRoom`
+Confirmation of successful room join.
+```typescript
+socket.on('joinedRoom', (roomId: string) => {});
+```
+
+#### `codeUpdate`
+Receive code changes from other users.
+```typescript
+socket.on('codeUpdate', (code: string) => {});
+```
+
+#### `languageChange`
+Receive language updates from other users.
+```typescript
+socket.on('languageChange', (language: string) => {});
+```
+
+#### `executionResult`
+Receive code execution output.
+```typescript
+socket.on('executionResult', (output: string) => {});
+```
+
+## Code Execution
+
+The backend uses the [Piston API](https://github.com/engineer-man/piston) for safe code execution.
+
+### Supported Languages
+- JavaScript (Node.js)
+- Python
+- TypeScript
+- Java
+- C++
+- Go
+- Rust
+- PHP
+
+### Execution Flow
+1. Client sends `executeCode` event
+2. Backend forwards code to Piston API
+3. Piston executes code in isolated container
+4. Backend receives output (stdout/stderr)
+5. Backend broadcasts `executionResult` to all clients in room
+
+## Configuration
+
+### CORS
+WebSocket CORS is configured to allow all origins:
+```typescript
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+  },
+})
+```
+
+For production, update to specific origins:
+```typescript
+cors: {
+  origin: ['https://yourdomain.com'],
+}
+```
+
+### Port
+Default port: `3000`
+
+To change, update `main.ts`:
+```typescript
+await app.listen(3001);
+```
+
+## Development
+
+### Linting
+```bash
+npm run lint
+```
+
+### Formatting
+```bash
+npm run format
+```
+
+## Debugging
+
+### Console Logs
+The application includes extensive logging:
+- Client connections/disconnections
+- Room joins
+- Code changes
+- Language changes
+- Code execution
+
+Check terminal output for real-time event logs.
+
+### Debug Mode
+Run with debugger attached:
+```bash
+npm run start:debug
+```
+
+Then attach your IDE debugger to port 9229.
+
+## Testing Integration
+
+### Manual Testing with Socket.io Client
+```typescript
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:3000');
+
+socket.on('connect', () => {
+  console.log('Connected');
+  socket.emit('joinRoom', 'test-room');
+});
+
+socket.on('joinedRoom', (roomId) => {
+  console.log('Joined room:', roomId);
+  socket.emit('codeChange', {
+    roomId: 'test-room',
+    code: 'console.log("test");'
+  });
+});
+```
+
+## Troubleshooting
+
+### Port Already in Use
+```bash
+# Find process using port 3000
+lsof -ti:3000
+
+# Kill the process
+kill -9 $(lsof -ti:3000)
+```
+
+### WebSocket Connection Failed
+- Ensure backend is running
+- Check firewall settings
+- Verify CORS configuration
+
+### Code Execution Timeout
+- Check internet connection (Piston API is external)
+- Increase timeout in execution service
+- Check Piston API status
+
+## Performance Considerations
+
+- **Room Isolation**: Each room is independent, no cross-room communication
+- **Broadcast Optimization**: Code changes only sent to other users, not sender
+- **Connection Pooling**: Socket.io handles connection pooling automatically
+
+## Security
+
+- **Input Validation**: All events should validate input (add as needed)
+- **Rate Limiting**: Consider adding rate limiting for production
+- **Code Execution**: Piston API provides sandboxed execution
+- **CORS**: Configure strict CORS for production
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+MIT
