@@ -46,7 +46,18 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
         @MessageBody() data: { roomId: string; code: string },
         @ConnectedSocket() client: Socket,
     ) {
+        console.log(`Code change in room ${data.roomId} from client ${client.id}`);
+        console.log(`Broadcasting to other clients in room ${data.roomId}`);
         client.to(data.roomId).emit('codeUpdate', data.code);
+    }
+
+    @SubscribeMessage('languageChange')
+    handleLanguageChange(
+        @MessageBody() data: { roomId: string; language: string },
+        @ConnectedSocket() client: Socket,
+    ) {
+        console.log(`Language change in room ${data.roomId} to ${data.language}`);
+        client.to(data.roomId).emit('languageChange', data.language);
     }
 
     @SubscribeMessage('executeCode')
