@@ -5,11 +5,17 @@
   <router-view></router-view>
 </template>
 
-<style>
+<style lang="scss">
 html, body, #app {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
+}
+
+body {
+  &:not(.monaco-enable-motion) {
+    display: block;
+  }
 }
 </style>

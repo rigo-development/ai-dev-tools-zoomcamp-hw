@@ -17,7 +17,7 @@
       </div>
 
       <!-- Join Existing Room Card -->
-      <div class="card join-card">
+      <div class="card join-card" @click.stop>
         <div class="card-icon">🔗</div>
         <h2>Join Existing Room</h2>
         <p>Enter a room ID to join an ongoing interview</p>
@@ -159,11 +159,12 @@ function joinRoom() {
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 380px));
   gap: 30px;
   max-width: 1200px;
   width: 100%;
   margin-bottom: 60px;
+  justify-content: center;
 }
 
 .card {
@@ -175,6 +176,9 @@ function joinRoom() {
   transition: all 0.3s ease;
   cursor: pointer;
   animation: fadeInUp 0.8s ease-out;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -210,6 +214,7 @@ function joinRoom() {
   font-size: 1rem;
   margin-bottom: 15px;
   transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
 .room-input:focus {
@@ -228,6 +233,7 @@ function joinRoom() {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
+  box-sizing: border-box;
 }
 
 .card-button:hover:not(:disabled) {
