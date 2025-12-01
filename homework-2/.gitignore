@@ -1,0 +1,12 @@
+/backend/node_modules
+/backend/dist
+/backend/.idea
+/backend/.vscode
+
+/frontend/node_modules
+/frontend/dist
+/frontend/.idea
+/frontend/.vscode
+PROMPTS.md
+
+/node_modules

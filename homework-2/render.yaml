@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: backend
+    runtime: docker
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: PORT
+        value: "3000"
+
+  - type: web
+    name: frontend
+    runtime: docker
+    dockerfilePath: frontend/Dockerfile
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: backend
+          property: url
