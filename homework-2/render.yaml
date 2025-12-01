@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: homework-2
+    name: coding-interview-platform
     runtime: docker
     plan: free
     region: oregon
