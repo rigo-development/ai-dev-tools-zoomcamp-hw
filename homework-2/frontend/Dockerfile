@@ -24,11 +24,11 @@ RUN rm -rf ./*
 # Copy built artifacts from build stage
 COPY --from=build /app/dist .
 
-# Copy custom nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy custom nginx configuration template
+COPY nginx.conf /etc/nginx/templates/default.conf.template
 
 # Expose port 80
 EXPOSE 80
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start Nginx with envsubst to inject environment variables
+CMD ["/bin/sh", "-c", "envsubst '${BACKEND_URL}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]

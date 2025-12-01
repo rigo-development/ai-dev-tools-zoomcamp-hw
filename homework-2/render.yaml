@@ -1,0 +1,23 @@
+services:
+  # Backend Service
+  - type: web
+    name: backend
+    runtime: docker
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: PORT
+        value: 3000
+    region: frankfurt # Or your preferred region
+
+  # Frontend Service
+  - type: web
+    name: frontend
+    runtime: docker
+    dockerfilePath: frontend/Dockerfile
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: backend
+          property: url
+    region: frankfurt
