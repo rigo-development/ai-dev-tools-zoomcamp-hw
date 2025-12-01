@@ -1,21 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
 import InterviewRoom from '../views/InterviewRoom.vue';
 
 const routes = [
     {
         path: '/',
-        redirect: '/room/default-room'
+        name: 'Home',
+        component: Home,
     },
     {
         path: '/room/:id',
-        name: 'InterviewRoom',
-        component: InterviewRoom
-    }
+        name: 'Room',
+        component: InterviewRoom,
+    },
 ];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 });
 
 export default router;
