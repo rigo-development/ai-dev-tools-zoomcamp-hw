@@ -11,7 +11,7 @@ import { ExecutionService } from './execution/execution.service';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
       exclude: ['/api/(.*)'],
-      renderPath: '/*',  // SPA fallback - serve index.html for all non-file routes
+      renderPath: '*',  // SPA fallback - serve index.html for all non-file routes
     }),
   ],
   controllers: [AppController],
