@@ -221,21 +221,28 @@ const copyShareLink = () => {
   min-height: 50px;
   box-sizing: border-box;
   gap: 20px;
+  flex-wrap: wrap;
 }
 .header-left {
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 .header-right {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .header h1 {
   margin: 0;
   font-size: 1.2rem;
   color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .share-btn {
   padding: 6px 12px;
@@ -246,6 +253,8 @@ const copyShareLink = () => {
   cursor: pointer;
   font-size: 13px;
   transition: background-color 0.2s;
+  min-height: 44px;
+  min-width: 44px;
 }
 .share-btn:hover {
   background-color: var(--bg-button-hover);
@@ -257,6 +266,7 @@ const copyShareLink = () => {
   border-radius: 2px;
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
 }
 .mode-indicator.local {
   background-color: rgba(102, 126, 234, 0.2);
@@ -276,6 +286,7 @@ const copyShareLink = () => {
   border-radius: 2px;
   cursor: pointer;
   font-size: 14px;
+  min-height: 44px;
 }
 .language-selector:focus {
   outline: 1px solid var(--accent-blue);
@@ -289,6 +300,8 @@ const copyShareLink = () => {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
+  min-height: 44px;
+  white-space: nowrap;
 }
 .run-btn:hover {
   background-color: var(--accent-blue-hover);
@@ -333,5 +346,95 @@ const copyShareLink = () => {
   font-family: 'Consolas', 'Monaco', monospace;
   font-size: 14px;
   white-space: pre-wrap;
+}
+
+/* Tablet and below (768px) */
+@media (max-width: 768px) {
+  .header {
+    padding: 8px 12px;
+    gap: 12px;
+  }
+  
+  .header h1 {
+    font-size: 1rem;
+    max-width: 200px;
+  }
+  
+  .header-left,
+  .header-right {
+    gap: 8px;
+  }
+  
+  .content {
+    flex-direction: column;
+  }
+  
+  .editor-pane {
+    flex: 1;
+    border-right: none;
+    border-bottom: 1px solid var(--border-primary);
+    min-height: 50%;
+  }
+  
+  .output-pane {
+    flex: 1;
+    border-left: none;
+    border-top: 1px solid var(--border-primary);
+    min-height: 30%;
+  }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .header {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  
+  .header h1 {
+    font-size: 0.9rem;
+    max-width: 150px;
+  }
+  
+  .header-left {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+  
+  .header-right {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+  
+  .share-btn,
+  .mode-indicator,
+  .language-selector,
+  .run-btn {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  
+  .mode-indicator {
+    flex-shrink: 0;
+  }
+  
+  .language-selector {
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  .run-btn {
+    flex-shrink: 0;
+  }
+  
+  .output-pane h3 {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+  
+  .output-pane pre {
+    font-size: 12px;
+    padding: 8px;
+  }
 }
 </style>
