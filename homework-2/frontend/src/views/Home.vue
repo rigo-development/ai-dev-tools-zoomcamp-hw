@@ -121,6 +121,10 @@ function joinRoom() {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .hero-section {
