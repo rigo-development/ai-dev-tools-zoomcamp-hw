@@ -181,6 +181,20 @@ npm run preview           # Preview production build
 - **Code Execution**: Piston API
 - **Testing**: Jest (backend), Vitest (frontend)
 
+## Deployment
+
+### Deploy to Render
+
+1. Fork this repository to your GitHub account.
+2. Create a new account on [Render](https://render.com).
+3. Connect your GitHub account to Render.
+4. Click "New +" and select "Blueprint".
+5. Select your forked repository.
+6. Render will automatically detect the `render.yaml` file and configure the deployment.
+7. Click "Apply" to start the deployment.
+
+The application will be deployed as a Docker container running both the backend and frontend.
+
 ## License
 
 MIT
