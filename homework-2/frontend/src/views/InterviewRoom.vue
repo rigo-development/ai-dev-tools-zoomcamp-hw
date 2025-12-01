@@ -2,6 +2,9 @@
   <div class="room-container">
     <div class="header">
       <div class="header-left">
+        <button @click="goHome" class="home-btn" title="Go to home">
+          🏠 Home
+        </button>
         <h1>Interview Room: {{ roomId }}</h1>
         <button @click="copyShareLink" class="share-btn" title="Copy share link">
           📋 {{ linkCopied ? 'Copied!' : 'Share Link' }}
@@ -40,13 +43,14 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import CodeEditor from '../components/CodeEditor.vue';
 import ThemeToggle from '../components/ThemeToggle.vue';
 import { socket } from '../services/socket';
 import { executeLocally } from '../services/localExecutor';
 
 const route = useRoute();
+const router = useRouter();
 const roomId = (route.params.id as string) || 'default-room';
 const executionMode = ref<'local' | 'api'>((route.query.mode as string) === 'local' ? 'local' : 'api');
 const linkCopied = ref(false);
@@ -199,6 +203,10 @@ const copyShareLink = () => {
     }, 2000);
   });
 };
+
+const goHome = () => {
+  router.push('/');
+};
 </script>
 
 <style scoped>
@@ -257,6 +265,21 @@ const copyShareLink = () => {
   min-width: 44px;
 }
 .share-btn:hover {
+  background-color: var(--bg-button-hover);
+}
+.home-btn {
+  padding: 6px 12px;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s;
+  min-height: 44px;
+  min-width: 44px;
+}
+.home-btn:hover {
   background-color: var(--bg-button-hover);
 }
 .mode-indicator {

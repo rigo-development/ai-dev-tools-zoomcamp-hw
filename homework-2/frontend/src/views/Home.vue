@@ -88,13 +88,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import ThemeToggle from '../components/ThemeToggle.vue';
 
 const router = useRouter();
+const route = useRoute();
 const roomIdInput = ref('');
 const executionMode = ref<'local' | 'api'>('local');
+
+// Check if there's a mode in the URL (e.g., when coming from a share link)
+onMounted(() => {
+  const modeParam = route.query.mode as string;
+  if (modeParam === 'local' || modeParam === 'api') {
+    executionMode.value = modeParam;
+  }
+});
 
 function generateRoomId(): string {
   return Math.random().toString(36).substring(2, 10);
@@ -107,7 +116,10 @@ function createNewRoom() {
 
 function joinRoom() {
   if (roomIdInput.value.trim()) {
-    router.push(`/room/${roomIdInput.value.trim()}?mode=${executionMode.value}`);
+    // Preserve mode from URL if present (e.g., from share link)
+    const modeParam = route.query.mode as string;
+    const mode = (modeParam === 'local' || modeParam === 'api') ? modeParam : executionMode.value;
+    router.push(`/room/${roomIdInput.value.trim()}?mode=${mode}`);
   }
 }
 </script>
