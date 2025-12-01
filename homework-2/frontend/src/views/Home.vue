@@ -12,11 +12,40 @@
 
     <div class="cards-container">
       <!-- Create New Room Card -->
-      <div class="card create-card" @click="createNewRoom">
+      <div class="card create-card" @click.stop>
         <div class="card-icon">🚀</div>
         <h2>Create New Room</h2>
         <p>Start a new interview session with a unique room ID</p>
-        <button class="card-button">Create Room</button>
+        
+        <!-- Execution Mode Selector -->
+        <div class="mode-selector-compact">
+          <label class="mode-label">Execution Mode:</label>
+          <div class="mode-options-inline">
+            <div
+              class="mode-option-compact"
+              :class="{ active: executionMode === 'local' }"
+              @click="executionMode = 'local'"
+            >
+              <span class="mode-icon">🌐</span>
+              <span class="mode-name">Local</span>
+            </div>
+            <div
+              class="mode-option-compact"
+              :class="{ active: executionMode === 'api' }"
+              @click="executionMode = 'api'"
+            >
+              <span class="mode-icon">☁️</span>
+              <span class="mode-name">API</span>
+            </div>
+          </div>
+          <p class="mode-description">
+            {{ executionMode === 'local' 
+              ? '🌐 Local: Fast, offline, JS & Python only' 
+              : '☁️ API: 8 languages, requires internet' }}
+          </p>
+        </div>
+        
+        <button class="card-button" @click="createNewRoom">Create Room</button>
       </div>
 
       <!-- Join Existing Room Card -->
@@ -34,47 +63,6 @@
         <button class="card-button" @click="joinRoom" :disabled="!roomIdInput.trim()">
           Join Room
         </button>
-      </div>
-
-      <!-- Execution Mode Card -->
-      <div class="card mode-card">
-        <div class="card-icon">⚡</div>
-        <h2>Execution Mode</h2>
-        <p>Choose how code will be executed</p>
-        
-        <div class="mode-selector">
-          <div
-            class="mode-option"
-            :class="{ active: executionMode === 'local' }"
-            @click="executionMode = 'local'"
-          >
-            <div class="mode-header">
-              <span class="mode-title">🌐 Local (Browser)</span>
-              <span class="mode-badge">Fast</span>
-            </div>
-            <ul class="mode-features">
-              <li>✓ Instant execution</li>
-              <li>✓ Works offline</li>
-              <li>⚠ JavaScript & Python only</li>
-            </ul>
-          </div>
-
-          <div
-            class="mode-option"
-            :class="{ active: executionMode === 'api' }"
-            @click="executionMode = 'api'"
-          >
-            <div class="mode-header">
-              <span class="mode-title">☁️ API (Piston)</span>
-              <span class="mode-badge">8 Languages</span>
-            </div>
-            <ul class="mode-features">
-              <li>✓ 8 programming languages</li>
-              <li>✓ Secure sandboxed execution</li>
-              <li>⚠ Requires internet</li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -106,7 +94,7 @@ import ThemeToggle from '../components/ThemeToggle.vue';
 
 const router = useRouter();
 const roomIdInput = ref('');
-const executionMode = ref<'local' | 'api'>('api');
+const executionMode = ref<'local' | 'api'>('local');
 
 function generateRoomId(): string {
   return Math.random().toString(36).substring(2, 10);
@@ -258,60 +246,67 @@ function joinRoom() {
   cursor: not-allowed;
 }
 
-.mode-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* Compact Mode Selector (inside Create Room card) */
+.mode-selector-compact {
+  margin: 15px 0;
+  text-align: left;
 }
 
-.mode-option {
+.mode-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.mode-options-inline {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.mode-option-compact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 12px;
   background: var(--bg-input);
   border: 2px solid var(--border-secondary);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
-.mode-option:hover {
+.mode-option-compact:hover {
   border-color: var(--border-hover);
+  transform: translateY(-2px);
 }
 
-.mode-option.active {
+.mode-option-compact.active {
   border-color: var(--accent-primary);
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(102, 126, 234, 0.15);
 }
 
-.mode-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+.mode-icon {
+  font-size: 1.5rem;
 }
 
-.mode-title {
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.mode-badge {
-  background: rgba(102, 126, 234, 0.3);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.mode-features {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.mode-name {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  font-weight: 600;
 }
 
-.mode-features li {
-  padding: 4px 0;
+.mode-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--bg-input);
+  border-radius: 6px;
+  text-align: center;
 }
 
 .features-section {
