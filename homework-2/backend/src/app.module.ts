@@ -1,11 +1,18 @@
 import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EventsGateway } from './events/events.gateway';
 import { ExecutionService } from './execution/execution.service';
 
 @Module({
-  imports: [],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+      exclude: ['/api/(.*)'],
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService, EventsGateway, ExecutionService],
 })
