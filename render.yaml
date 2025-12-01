@@ -9,5 +9,5 @@ services:
         value: 3000
       - key: NODE_ENV
         value: production
-    dockerContext: .
-    dockerfilePath: Dockerfile
+    dockerContext: homework-2
+    dockerfilePath: homework-2/Dockerfile
