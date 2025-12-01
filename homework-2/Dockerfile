@@ -1,5 +1,5 @@
 # Stage 1: Build Frontend
-FROM node:18-slim AS frontend-build
+FROM node:22-slim AS frontend-build
 WORKDIR /app/frontend
 
 # Copy frontend package files
@@ -15,7 +15,7 @@ COPY frontend/ .
 RUN npm run build
 
 # Stage 2: Build Backend
-FROM node:18-slim AS backend-build
+FROM node:22-slim AS backend-build
 WORKDIR /app/backend
 
 # Copy backend package files
@@ -31,7 +31,7 @@ COPY backend/ .
 RUN npm run build
 
 # Stage 3: Production
-FROM node:18-slim
+FROM node:22-slim
 WORKDIR /app
 
 # Copy backend build
