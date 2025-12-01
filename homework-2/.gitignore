@@ -8,3 +8,5 @@
 /frontend/.idea
 /frontend/.vscode
 PROMPTS.md
+
+/node_modules

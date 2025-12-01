@@ -28,19 +28,34 @@ homework-2/
 
 ### Installation
 
-1. **Install Backend Dependencies**
+**Option 1: Install All Dependencies at Once**
 ```bash
-cd backend
-npm install
+npm run install:all
 ```
 
-2. **Install Frontend Dependencies**
+**Option 2: Install Manually**
 ```bash
-cd frontend
+# Install root dependencies (concurrently)
+npm install
+
+# Install backend dependencies
+cd backend
+npm install
+
+# Install frontend dependencies
+cd ../frontend
 npm install
 ```
 
 ### Running the Application
+
+**Option 1: Run Both Servers Concurrently (Recommended)**
+```bash
+npm run dev
+```
+This starts both backend (http://localhost:3000) and frontend (http://localhost:5173) simultaneously.
+
+**Option 2: Run Servers Separately**
 
 1. **Start Backend** (Terminal 1)
 ```bash
