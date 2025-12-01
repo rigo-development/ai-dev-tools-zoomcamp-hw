@@ -49,11 +49,52 @@ import { executeLocally } from '../services/localExecutor';
 const route = useRoute();
 const roomId = (route.params.id as string) || 'default-room';
 const executionMode = ref<'local' | 'api'>((route.query.mode as string) === 'local' ? 'local' : 'api');
-const code = ref('// Start coding here\nconsole.log("Hello World");');
-const output = ref('');
-const executing = ref(false);
-const selectedLanguage = ref('javascript');
 const linkCopied = ref(false);
+const selectedLanguage = ref('javascript');
+const executing = ref(false);
+const output = ref('');
+
+const languageTemplates: Record<string, string> = {
+  javascript: `// JavaScript Hello World
+console.log("Hello World");`,
+  python: `# Python Hello World
+print("Hello World")`,
+  typescript: `// TypeScript Hello World
+const message: string = "Hello World";
+console.log(message);`,
+  java: `// Java Hello World
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}`,
+  cpp: `// C++ Hello World
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World" << std::endl;
+    return 0;
+}`,
+  go: `// Go Hello World
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello World")
+}`,
+  rust: `// Rust Hello World
+fn main() {
+    println!("Hello World");
+}`,
+  php: `<?php
+// PHP Hello World
+echo "Hello World";
+?>`
+};
+
+// Initialize code with template for default language
+const code = ref(languageTemplates['javascript']);
 
 // Language options based on execution mode
 const allLanguages = [
@@ -99,6 +140,8 @@ onMounted(() => {
   socket.on('languageChange', (newLanguage: string) => {
     console.log('Received languageChange:', newLanguage);
     selectedLanguage.value = newLanguage;
+    // Also update code template if it's a fresh switch (optional, but good for sync)
+    // For now, we trust the other client might have sent codeUpdate too.
   });
 });
 
@@ -117,6 +160,12 @@ const onCodeChange = (newCode: string) => {
 
 const onLanguageChange = () => {
   console.log('Language changed to:', selectedLanguage.value);
+  const template = languageTemplates[selectedLanguage.value];
+  if (template) {
+    code.value = template;
+    // Emit code change along with language change so other peers get the new template
+    socket.emit('codeChange', { roomId, code: template });
+  }
   socket.emit('languageChange', { roomId, language: selectedLanguage.value });
 };
 

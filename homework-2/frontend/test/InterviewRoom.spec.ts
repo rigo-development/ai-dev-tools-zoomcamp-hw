@@ -189,4 +189,23 @@ describe('InterviewRoom Component', () => {
         expect(outputPane.exists()).toBe(true);
         expect(outputPane.text()).toContain('Output');
     });
+    it('updates code template when language changes', async () => {
+        router.push('/room/test-room');
+        await router.isReady();
+
+        const wrapper = mount(InterviewRoom, {
+            global: {
+                plugins: [router],
+            },
+        });
+
+        const languageSelector = wrapper.find('.language-selector');
+        await languageSelector.setValue('python');
+
+        // Check if codeChange was emitted with Python template
+        expect(mockSocket.emit).toHaveBeenCalledWith('codeChange', {
+            roomId: 'test-room',
+            code: expect.stringContaining('print("Hello World")')
+        });
+    });
 });
