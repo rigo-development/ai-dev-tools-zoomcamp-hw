@@ -1,19 +1,21 @@
 services:
-  # Backend Service
+  # Backend Service (Microservice 1)
   - type: web
     name: backend
     runtime: docker
     dockerfilePath: backend/Dockerfile
+    plan: free # Use free tier
     envVars:
       - key: PORT
         value: "3000"
-    region: frankfurt # Or your preferred region
+    region: frankfurt
 
-  # Frontend Service
+  # Frontend Service (Microservice 2 - Nginx Proxy)
   - type: web
     name: frontend
     runtime: docker
     dockerfilePath: frontend/Dockerfile
+    plan: free # Use free tier
     envVars:
       - key: BACKEND_URL
         fromService:
