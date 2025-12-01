@@ -8,6 +8,7 @@
         </button>
       </div>
       <div class="header-right">
+        <ThemeToggle />
         <span class="mode-indicator" :class="executionMode">
           {{ executionMode === 'local' ? '🌐 Local' : '☁️ API' }}
         </span>
@@ -41,6 +42,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import CodeEditor from '../components/CodeEditor.vue';
+import ThemeToggle from '../components/ThemeToggle.vue';
 import { socket } from '../services/socket';
 import { executeLocally } from '../services/localExecutor';
 
@@ -156,8 +158,8 @@ const copyShareLink = () => {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  background-color: #1e1e1e;
-  color: #e0e0e0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   overflow: hidden;
 }
 .header {
@@ -165,8 +167,8 @@ const copyShareLink = () => {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #252526;
-  border-bottom: 1px solid #333;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
   min-height: 50px;
   box-sizing: border-box;
   gap: 20px;
@@ -184,54 +186,54 @@ const copyShareLink = () => {
 .header h1 {
   margin: 0;
   font-size: 1.2rem;
-  color: #fff;
+  color: var(--text-primary);
 }
 .share-btn {
   padding: 6px 12px;
-  background-color: #2d2d30;
-  color: #e0e0e0;
-  border: 1px solid #3e3e42;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
   border-radius: 2px;
   cursor: pointer;
   font-size: 13px;
   transition: background-color 0.2s;
 }
 .share-btn:hover {
-  background-color: #3e3e42;
+  background-color: var(--bg-button-hover);
 }
 .mode-indicator {
   padding: 6px 12px;
-  background-color: #2d2d30;
-  border: 1px solid #3e3e42;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
   border-radius: 2px;
   font-size: 13px;
   font-weight: 600;
 }
 .mode-indicator.local {
   background-color: rgba(102, 126, 234, 0.2);
-  border-color: #667eea;
-  color: #667eea;
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
 }
 .mode-indicator.api {
   background-color: rgba(118, 75, 162, 0.2);
-  border-color: #764ba2;
+  border-color: var(--accent-secondary);
   color: #b794f4;
 }
 .language-selector {
   padding: 6px 10px;
-  background-color: #2d2d30;
-  color: #e0e0e0;
-  border: 1px solid #3e3e42;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
   border-radius: 2px;
   cursor: pointer;
   font-size: 14px;
 }
 .language-selector:focus {
-  outline: 1px solid #0e639c;
+  outline: 1px solid var(--accent-blue);
 }
 .run-btn {
   padding: 6px 16px;
-  background-color: #0e639c;
+  background-color: var(--accent-blue);
   color: white;
   border: none;
   border-radius: 2px;
@@ -240,7 +242,7 @@ const copyShareLink = () => {
   transition: background-color 0.2s;
 }
 .run-btn:hover {
-  background-color: #1177bb;
+  background-color: var(--accent-blue-hover);
 }
 .run-btn:disabled {
   background-color: #4d4d4d;
@@ -255,24 +257,24 @@ const copyShareLink = () => {
   flex: 2;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #333;
+  border-right: 1px solid var(--border-primary);
   min-width: 0; /* Prevent flex item from overflowing */
 }
 .output-pane {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e1e;
-  border-left: 1px solid #333;
+  background: var(--bg-primary);
+  border-left: 1px solid var(--border-primary);
   min-width: 0;
 }
 .output-pane h3 {
   margin: 0;
   padding: 10px;
-  background-color: #252526;
+  background-color: var(--bg-secondary);
   font-size: 0.9rem;
   text-transform: uppercase;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--border-primary);
 }
 .output-pane pre {
   margin: 0;

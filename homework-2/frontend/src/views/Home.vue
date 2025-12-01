@@ -1,6 +1,9 @@
 <template>
   <div class="home-container">
     <div class="hero-section">
+      <div class="theme-toggle-wrapper">
+        <ThemeToggle />
+      </div>
       <h1 class="title">
         <span class="gradient-text">Code</span>Interview<span class="gradient-text">Pro</span>
       </h1>
@@ -99,6 +102,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import ThemeToggle from '../components/ThemeToggle.vue';
 
 const router = useRouter();
 const roomIdInput = ref('');
@@ -123,8 +127,8 @@ function joinRoom() {
 <style scoped>
 .home-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d30 100%);
-  color: #e0e0e0;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-tertiary) 100%);
+  color: var(--text-primary);
   padding: 40px 20px;
   display: flex;
   flex-direction: column;
@@ -132,9 +136,17 @@ function joinRoom() {
 }
 
 .hero-section {
+  position: relative;
   text-align: center;
   margin-bottom: 60px;
+  padding-top: 60px; /* Add space for theme toggle */
   animation: fadeInDown 0.8s ease-out;
+}
+
+.theme-toggle-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .title {
@@ -153,7 +165,7 @@ function joinRoom() {
 
 .subtitle {
   font-size: 1.2rem;
-  color: #b0b0b0;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -168,9 +180,9 @@ function joinRoom() {
 }
 
 .card {
-  background: rgba(45, 45, 48, 0.6);
+  background: var(--bg-elevated);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-secondary);
   border-radius: 16px;
   padding: 30px;
   transition: all 0.3s ease;
@@ -183,8 +195,8 @@ function joinRoom() {
 
 .card:hover {
   transform: translateY(-5px);
-  border-color: rgba(102, 126, 234, 0.5);
-  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+  border-color: var(--border-hover);
+  box-shadow: 0 10px 40px var(--shadow-glow);
 }
 
 .card-icon {
@@ -195,11 +207,11 @@ function joinRoom() {
 .card h2 {
   font-size: 1.5rem;
   margin: 0 0 10px 0;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .card p {
-  color: #b0b0b0;
+  color: var(--text-secondary);
   margin: 0 0 20px 0;
   font-size: 0.95rem;
 }
@@ -207,10 +219,10 @@ function joinRoom() {
 .room-input {
   width: 100%;
   padding: 12px 16px;
-  background: rgba(30, 30, 30, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-input);
+  border: 1px solid var(--border-secondary);
   border-radius: 8px;
-  color: #e0e0e0;
+  color: var(--text-primary);
   font-size: 1rem;
   margin-bottom: 15px;
   transition: border-color 0.3s;
@@ -219,13 +231,13 @@ function joinRoom() {
 
 .room-input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--border-focus);
 }
 
 .card-button {
   width: 100%;
   padding: 12px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-button-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -238,7 +250,7 @@ function joinRoom() {
 
 .card-button:hover:not(:disabled) {
   transform: scale(1.02);
-  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 5px 20px var(--shadow-glow);
 }
 
 .card-button:disabled {
@@ -253,8 +265,8 @@ function joinRoom() {
 }
 
 .mode-option {
-  background: rgba(30, 30, 30, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-input);
+  border: 2px solid var(--border-secondary);
   border-radius: 12px;
   padding: 16px;
   cursor: pointer;
@@ -262,11 +274,11 @@ function joinRoom() {
 }
 
 .mode-option:hover {
-  border-color: rgba(102, 126, 234, 0.5);
+  border-color: var(--border-hover);
 }
 
 .mode-option.active {
-  border-color: #667eea;
+  border-color: var(--accent-primary);
   background: rgba(102, 126, 234, 0.1);
 }
 
@@ -295,7 +307,7 @@ function joinRoom() {
   padding: 0;
   margin: 0;
   font-size: 0.85rem;
-  color: #b0b0b0;
+  color: var(--text-secondary);
 }
 
 .mode-features li {
@@ -316,7 +328,7 @@ function joinRoom() {
   align-items: center;
   gap: 10px;
   font-size: 1rem;
-  color: #b0b0b0;
+  color: var(--text-secondary);
 }
 
 .feature-icon {
