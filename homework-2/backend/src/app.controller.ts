@@ -9,4 +9,9 @@ export class AppController {
   getHealth(): string {
     return 'OK';
   }
+
+  @Get('/')
+  getRoot(): string {
+    return 'Backend is running! Access the Frontend service to use the application.';
+  }
 }
