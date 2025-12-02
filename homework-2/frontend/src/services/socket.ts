@@ -1,6 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 import { reactive } from 'vue';
-import { env } from '@/config/env';
+import { env } from '@/config/env'
 
 // Enhanced reactive state to track connection status and reconnection attempts
 export const state = reactive({
