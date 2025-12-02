@@ -14,6 +14,13 @@ vi.mock('../src/services/socket', () => {
     };
     return {
         socket: mockSocket,
+        state: {
+            connected: false,
+            reconnecting: false,
+            reconnectAttempts: 0,
+            connectionError: null,
+        },
+        getConnectionStatus: vi.fn(() => 'Disconnected'),
     };
 });
 

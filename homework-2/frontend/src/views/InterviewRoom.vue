@@ -1,5 +1,10 @@
 <template>
   <div class="room-container">
+    <!-- Connection Status Banner -->
+    <div class="connection-status" :class="connectionStatusClass">
+      <span class="status-icon">{{ connectionStatusIcon }}</span>
+      <span class="status-text">{{ connectionStatusText }}</span>
+    </div>
     <div class="header">
       <div class="header-left">
         <button @click="goHome" class="home-btn" title="Go to home">
@@ -46,7 +51,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import CodeEditor from '../components/CodeEditor.vue';
 import ThemeToggle from '../components/ThemeToggle.vue';
-import { socket } from '../services/socket';
+import { socket, state as socketState, getConnectionStatus } from '../services/socket';
 import { executeLocally } from '../services/localExecutor';
 
 const route = useRoute();
@@ -121,6 +126,23 @@ const availableLanguages = computed(() => {
   return executionMode.value === 'local' ? localLanguages : allLanguages;
 });
 
+// Connection status computed properties
+const connectionStatusText = computed(() => getConnectionStatus());
+
+const connectionStatusClass = computed(() => {
+  if (socketState.connected) return 'status-connected';
+  if (socketState.reconnecting) return 'status-reconnecting';
+  if (socketState.connectionError) return 'status-error';
+  return 'status-disconnected';
+});
+
+const connectionStatusIcon = computed(() => {
+  if (socketState.connected) return '✓';
+  if (socketState.reconnecting) return '⟳';
+  if (socketState.connectionError) return '✕';
+  return '○';
+});
+
 onMounted(() => {
   console.log('Mounting InterviewRoom, connecting socket...');
   socket.connect();
@@ -147,6 +169,12 @@ onMounted(() => {
     // Also update code template if it's a fresh switch (optional, but good for sync)
     // For now, we trust the other client might have sent codeUpdate too.
   });
+
+  // Handle reconnection - automatically rejoin room
+  socket.on('reconnect', () => {
+    console.log('Reconnected! Rejoining room:', roomId);
+    socket.emit('joinRoom', roomId);
+  });
 });
 
 onUnmounted(() => {
@@ -154,6 +182,7 @@ onUnmounted(() => {
   socket.off('codeUpdate');
   socket.off('executionResult');
   socket.off('languageChange');
+  socket.off('reconnect');
   socket.disconnect();
 });
 
@@ -219,6 +248,51 @@ const goHome = () => {
   color: var(--text-primary);
   overflow: hidden;
 }
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.connection-status.status-reconnecting,
+.connection-status.status-error,
+.connection-status.status-disconnected {
+  height: 28px;
+  opacity: 1;
+}
+
+.status-connected {
+  background-color: #48bb78;
+  color: white;
+  /* Hide when connected to avoid clutter, or keep it briefly */
+  height: 0; 
+  opacity: 0;
+}
+
+.status-reconnecting {
+  background-color: #ecc94b;
+  color: #744210;
+}
+
+.status-error {
+  background-color: #f56565;
+  color: white;
+}
+
+.status-disconnected {
+  background-color: #a0aec0;
+  color: white;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
