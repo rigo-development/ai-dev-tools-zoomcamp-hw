@@ -144,12 +144,10 @@ const connectionStatusIcon = computed(() => {
 });
 
 onMounted(() => {
-  console.log('Mounting InterviewRoom, connecting socket...');
   socket.connect();
   socket.emit('joinRoom', roomId);
 
   socket.on('codeUpdate', (newCode: string) => {
-    console.log('Received codeUpdate:', newCode.substring(0, 50) + '...');
     // Only update if significantly different to avoid cursor jumps if possible,
     // but for now simple replacement.
     if (newCode !== code.value) {
@@ -158,13 +156,11 @@ onMounted(() => {
   });
 
   socket.on('executionResult', (result: string) => {
-    console.log('Received executionResult');
     output.value = result;
     executing.value = false;
   });
 
   socket.on('languageChange', (newLanguage: string) => {
-    console.log('Received languageChange:', newLanguage);
     selectedLanguage.value = newLanguage;
     // Also update code template if it's a fresh switch (optional, but good for sync)
     // For now, we trust the other client might have sent codeUpdate too.
@@ -172,13 +168,11 @@ onMounted(() => {
 
   // Handle reconnection - automatically rejoin room
   socket.on('reconnect', () => {
-    console.log('Reconnected! Rejoining room:', roomId);
     socket.emit('joinRoom', roomId);
   });
 });
 
 onUnmounted(() => {
-  console.log('Unmounting InterviewRoom, disconnecting socket...');
   socket.off('codeUpdate');
   socket.off('executionResult');
   socket.off('languageChange');
@@ -187,12 +181,10 @@ onUnmounted(() => {
 });
 
 const onCodeChange = (newCode: string) => {
-  console.log('Code changed locally, emitting codeChange event');
   socket.emit('codeChange', { roomId, code: newCode });
 };
 
 const onLanguageChange = () => {
-  console.log('Language changed to:', selectedLanguage.value);
   const template = languageTemplates[selectedLanguage.value];
   if (template) {
     code.value = template;
@@ -205,7 +197,6 @@ const onLanguageChange = () => {
 const runCode = async () => {
   executing.value = true;
   output.value = 'Executing...';
-  console.log('Executing code with language:', selectedLanguage.value, 'mode:', executionMode.value);
   
   if (executionMode.value === 'local') {
     // Local browser execution

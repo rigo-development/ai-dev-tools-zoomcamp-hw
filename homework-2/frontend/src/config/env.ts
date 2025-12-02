@@ -11,7 +11,6 @@ function validateEnv() {
             VITE_BACKEND_URL: import.meta.env.VITE_BACKEND_URL,
             MODE: import.meta.env.MODE
         };
-        console.log('Validating environment:', envVars);
         return v.parse(envSchema, envVars)
     } catch (error) {
         console.error('Environment validation failed:', error)

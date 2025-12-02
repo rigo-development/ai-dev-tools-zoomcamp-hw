@@ -45,8 +45,8 @@ const handleChange = (val: string) => {
   emit('change', val);
 };
 
-const handleMount = (editor: any) => {
-  console.log('Editor mounted');
+const handleMount = (_editor: any) => {
+  // Editor mounted successfully
 };
 </script>
 

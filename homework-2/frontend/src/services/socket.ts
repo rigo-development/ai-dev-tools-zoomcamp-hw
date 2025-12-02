@@ -16,7 +16,6 @@ export const state = reactive({
 // "undefined" means the URL will be computed from the `window.location` object
 // For dev, backend is usually on localhost:3000
 const URL = env.VITE_BACKEND_URL || (env.MODE === 'production' ? undefined : 'http://localhost:3000');
-console.log('Socket.IO connecting to:', URL || 'current domain');
 
 export const socket: Socket = io(URL, {
     autoConnect: false,
@@ -36,12 +35,10 @@ socket.on('connect', () => {
     state.reconnecting = false;
     state.reconnectAttempts = 0;
     state.connectionError = null;
-    console.log('Connected to WebSocket server');
 });
 
 socket.on('disconnect', (reason) => {
     state.connected = false;
-    console.log('Disconnected from WebSocket server:', reason);
 
     // If disconnect was due to server or transport issues, reconnection will be attempted
     if (reason === 'io server disconnect') {
@@ -58,14 +55,12 @@ socket.on('connect_error', (error) => {
 socket.on('reconnect_attempt', (attemptNumber) => {
     state.reconnecting = true;
     state.reconnectAttempts = attemptNumber;
-    console.log(`Reconnection attempt ${attemptNumber}/${state.maxReconnectAttempts}`);
 });
 
-socket.on('reconnect', (attemptNumber) => {
+socket.on('reconnect', (_attemptNumber) => {
     state.reconnecting = false;
     state.reconnectAttempts = 0;
     state.connectionError = null;
-    console.log(`Reconnected after ${attemptNumber} attempts`);
 });
 
 socket.on('reconnect_failed', () => {
