@@ -2,6 +2,10 @@
 FROM node:22-slim AS build
 WORKDIR /app
 
+# Declare build argument for Vite
+ARG VITE_BACKEND_URL
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+
 # Copy package files
 COPY package*.json ./
 
@@ -11,7 +15,7 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build frontend
+# Build frontend (Vite will use VITE_BACKEND_URL from ENV)
 RUN npm run build
 
 # Stage 2: Serve with Nginx

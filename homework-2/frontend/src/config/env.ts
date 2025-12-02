@@ -7,10 +7,12 @@ const envSchema = v.object({
 
 function validateEnv() {
     try {
-        return v.parse(envSchema, {
+        const envVars = {
             VITE_BACKEND_URL: import.meta.env.VITE_BACKEND_URL,
             MODE: import.meta.env.MODE
-        })
+        };
+        console.log('Validating environment:', envVars);
+        return v.parse(envSchema, envVars)
     } catch (error) {
         console.error('Environment validation failed:', error)
         throw new Error('Invalid environment configuration. Please check your .env file.')
