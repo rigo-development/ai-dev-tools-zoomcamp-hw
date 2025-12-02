@@ -23,7 +23,9 @@ export const socket: Socket = io(URL, {
     reconnectionAttempts: 5,
     reconnectionDelay: 1000,
     reconnectionDelayMax: 5000,
-    timeout: 20000
+    timeout: 20000,
+    // Force websocket transport to avoid polling issues on Render
+    transports: ['websocket']
 });
 
 // Connection event handlers

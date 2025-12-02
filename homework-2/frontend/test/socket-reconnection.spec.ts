@@ -31,6 +31,11 @@ describe('Socket.IO Reconnection Configuration', () => {
     it('should have autoConnect disabled', () => {
         expect(socket.io.opts.autoConnect).toBe(false);
     });
+
+    it('should use websocket transport', () => {
+        expect(socket.io.opts.transports).toContain('websocket');
+        expect(socket.io.opts.transports).toHaveLength(1);
+    });
 });
 
 describe('Connection State Management', () => {

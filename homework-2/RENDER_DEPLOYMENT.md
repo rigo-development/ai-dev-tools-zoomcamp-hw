@@ -44,6 +44,9 @@ If you experience connection problems:
 1.  **"Reconnecting..." persists**: The backend might be waking up. Wait up to a minute.
 2.  **"Connection failed"**: Refresh the page. If the issue persists, check if the backend service is healthy in the Render dashboard.
 3.  **Code not syncing**: Ensure both users are in the same room ID. Check the connection status indicator.
+4.  **"Server Error"**: This usually indicates a CORS or Transport issue.
+    -   **CORS**: The backend is configured to allow all origins dynamically (`callback(null, true)`) to support credentials.
+    -   **Transports**: The frontend is forced to use `websocket` transport to avoid polling issues on Render.
 
 ## Deployment Checklist
 

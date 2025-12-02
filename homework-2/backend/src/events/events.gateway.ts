@@ -12,7 +12,11 @@ import { ExecutionService } from '../execution/execution.service';
 
 @WebSocketGateway({
     cors: {
-        origin: '*',
+        origin: (requestOrigin, callback) => {
+            // Allow all origins by reflecting the request origin
+            callback(null, true);
+        },
+        credentials: true,
     },
 })
 export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
