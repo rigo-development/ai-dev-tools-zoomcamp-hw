@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 import { reactive } from 'vue';
+import { env } from '@/config/env';
 
 // Enhanced reactive state to track connection status and reconnection attempts
 export const state = reactive({
@@ -14,7 +15,7 @@ export const state = reactive({
 
 // "undefined" means the URL will be computed from the `window.location` object
 // For dev, backend is usually on localhost:3000
-const URL = import.meta.env.VITE_BACKEND_URL || (import.meta.env.MODE === 'production' ? undefined : 'http://localhost:3000');
+const URL = env.VITE_BACKEND_URL || (env.MODE === 'production' ? undefined : 'http://localhost:3000');
 console.log('Socket.IO connecting to:', URL || 'current domain');
 
 export const socket: Socket = io(URL, {
