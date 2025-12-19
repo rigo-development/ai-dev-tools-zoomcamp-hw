@@ -12,11 +12,10 @@ The goal of this project is to build a documentation search and web content retr
 
 ## Project Structure
 
-- `main.py`: The primary MCP server entry point containing the tools.
+- `main.py`: The primary MCP server entry point containing the tools (automatically downloads docs if missing).
 - `minsearch.py`: A lightweight, local search engine implementation.
-- `main.zip`: Pre-downloaded documentation source for indexing.
-- `search.py`: Command-line interface for testing the indexing and search logic.
-- `test.py` / `test_search_tool.py`: Utility scripts for unit testing the tool functions.
+- `search.py`: Command-line interface for testing indexing/search (automatically downloads docs if missing).
+- `.gitignore`: Configured to exclude environment files and documentation artifacts.
 
 ## Getting Started
 

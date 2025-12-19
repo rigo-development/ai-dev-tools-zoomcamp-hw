@@ -9,8 +9,20 @@ mcp = FastMCP("Demo 🚀")
 # Initialization logic for the documentation index
 def load_index():
     zip_path = os.path.join(os.path.dirname(__file__), 'main.zip')
+    
+    # Automatically download if missing
     if not os.path.exists(zip_path):
-        return None
+        print("main.zip not found. Downloading documentation...")
+        url = "https://github.com/jlowin/fastmcp/archive/refs/heads/main.zip"
+        try:
+            response = requests.get(url, timeout=30)
+            response.raise_for_status()
+            with open(zip_path, 'wb') as f:
+                f.write(response.content)
+            print("Successfully downloaded main.zip")
+        except Exception as e:
+            print(f"Error downloading documentation: {e}")
+            return None
         
     docs = []
     with zipfile.ZipFile(zip_path, 'r') as z:
