@@ -1,6 +1,6 @@
 # MCP Server Clone (Context7 Implementation)
 
-This project is a study implementation of an MCP (Model Context Protocol) server, built as part of the homework for the **[AI-Dev-Tools-Zoomcamp](https://github.com/alexeygrigorev/ai-dev-tools-zoomcamp)**.
+This project is a study implementation of an MCP (Model Context Protocol) server, built as part of the homework for the **[AI-Dev-Tools-Zoomcamp](https://github.com/DataTalksClub/ai-dev-tools-zoomcamp/tree/main)**.
 
 The goal of this project is to build a documentation search and web content retrieval server using `FastMCP` and `minsearch`.
 
