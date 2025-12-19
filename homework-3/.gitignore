@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.python-version
+main.zip
+test.py
+test_search_tool.py
